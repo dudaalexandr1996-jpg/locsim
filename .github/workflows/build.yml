@@ -10,20 +10,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
       - name: Install Theos
         run: |
           brew install ldid xz
           git clone --recursive https://github.com/theos/theos.git ${{ github.workspace }}/theos
-        env:
-          THEOS: ${{ github.workspace }}/theos
 
       - name: Build deb
         run: make package
         env:
           THEOS: ${{ github.workspace }}/theos
-          THEOS_MAKE_PATH: ${{ github.workspace }}/theos/makefiles
-          SDKVERSION: 16.4
           ARCHS: arm64
+          TARGET: iphone:clang:latest:14.0
 
       - name: Upload deb
         uses: actions/upload-artifact@v4
