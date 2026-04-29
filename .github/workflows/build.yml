@@ -1,0 +1,28 @@
+name: Build locsim
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Theos
+        run: |
+          brew install ldid xz
+          git clone --recursive https://github.com/theos/theos.git $THEOS
+          echo "THEOS=$HOME/theos" >> $GITHUB_ENV
+        env:
+          THEOS: ${{ github.workspace }}/theos
+
+      - name: Build deb
+        run: make package
+
+      - name: Upload deb
+        uses: actions/upload-artifact@v3
+        with:
+          name: locsim-deb
+          path: packages/*.deb
