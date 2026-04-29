@@ -299,7 +299,7 @@ int main(int argc, char *argv[], char *envp[]) {
 				loc = [[CLLocation alloc] initWithCoordinate:coor altitude:alt horizontalAccuracy:ha verticalAccuracy:va course:c speed:s timestamp:ts];
 			}
 			start_loc_sim(loc, ldb, lrb);
-			PRINT("latitude: %.15f\nlongitude: %.15f\naltitude: %.15f\nhorizontal accuracy: %.15f\nvertical accuracy: %.15f\nspeed: %.15f\nspeed accuracy: %.15f\ncourse: %.15f\ncourse accuracy: %.15f\ntimestamp: %s\n", coor.latitude, coor.longitude, alt, ha, va, s, sa, c, ca, [NSDateFormatter localizedStringFromDate:ts dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterFullStyle].UTF8String);
+			PRINT("latitude: %f\nlongitude: %f\naltitude: %f\nhorizontal accuracy: %.15f\nvertical accuracy: %.15f\nspeed: %.15f\nspeed accuracy: %.15f\ncourse: %.15f\ncourse accuracy: %.15f\ntimestamp: %s\n", coor.latitude, coor.longitude, alt, ha, va, s, sa, c, ca, [NSDateFormatter localizedStringFromDate:ts dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterFullStyle].UTF8String);
 		}
 	}else if (strcasecmp(argv[0], "stop") == 0){
 		if (force){
