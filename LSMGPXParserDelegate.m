@@ -71,7 +71,7 @@
 			}else{
 				_lastEpoch = [NSDate date].timeIntervalSince1970;
 			}
-			_processingElement[@"time"] = [NSString stringWithFormat:@"%.15f", _last​​​​​​​​​​​​​​​​
+			_processingElement[@"time"] = [NSString stringWithFormat:@"%.15f", _last​​​​​​​​​​​​​​​​Epoch];
 		}
 		[_processingTracks addObject:_processingElement];
 		_lastProcessingElement = _processingElement.copy;
