@@ -71,7 +71,7 @@
 			}else{
 				_lastEpoch = [NSDate date].timeIntervalSince1970;
 			}
-			_processingElement[@"time"] = [NSString stringWithFormat:@"%.15f", _last​​​​​​​​​​​​​​​​Epoch];
+			_processingElement[@"time"] = [NSString stringWithFormat:@"%.15f", _lastEpoch];
 		}
 		[_processingTracks addObject:_processingElement];
 		_lastProcessingElement = _processingElement.copy;
@@ -149,25 +149,17 @@
 			course = lastCourse;
 		}
 		
-		//+[NSKeyedArchiver archivedDataWithRootObject:requiringSecureCoding:error:] of CLLocation doesn't seems to work
-		//Reference: https://bottleofcode.com/posts/custom-gps-data-in-the-ios-simulator/
 		NSString *archivedLoc = archivedCLLocBase.copy;
 		archivedLoc = [archivedLoc stringByReplacingOccurrencesOfString:@"ALTPLACE" withString:(track[@"ele"] ?: @"0")];
 		archivedLoc = [archivedLoc stringByReplacingOccurrencesOfString:@"LATPLACE" withString:track[@"lat"]];
 		archivedLoc = [archivedLoc stringByReplacingOccurrencesOfString:@"LONGPLACE" withString:track[@"lon"]];
-		archivedLoc = [archivedLoc stringByReplacingOccurrencesOfString:@"COURSEPLACE" withString:[NSString stringWithFormat:@"%.15f", course]
-];
-		archivedLoc = [archivedLoc stringByReplacingOccurrencesOfString:@"HORZACPLACE" withString:[NSString stringWithFormat:@"%.15f", self.hAccuracy]
-];
-		archivedLoc = [archivedLoc stringByReplacingOccurrencesOfString:@"LIFESPAPLACE" withString:[NSString stringWithFormat:@"%.15f", self.lifeSpan]
-];
-		archivedLoc = [archivedLoc stringByReplacingOccurrencesOfString:@"SPEEDPLACE" withString:[NSString stringWithFormat:@"%.15f", speed]
-];
+		archivedLoc = [archivedLoc stringByReplacingOccurrencesOfString:@"COURSEPLACE" withString:[NSString stringWithFormat:@"%.15f", course]];
+		archivedLoc = [archivedLoc stringByReplacingOccurrencesOfString:@"HORZACPLACE" withString:[NSString stringWithFormat:@"%.15f", self.hAccuracy]];
+		archivedLoc = [archivedLoc stringByReplacingOccurrencesOfString:@"LIFESPAPLACE" withString:[NSString stringWithFormat:@"%.15f", self.lifeSpan]];
+		archivedLoc = [archivedLoc stringByReplacingOccurrencesOfString:@"SPEEDPLACE" withString:[NSString stringWithFormat:@"%.15f", speed]];
 		archivedLoc = [archivedLoc stringByReplacingOccurrencesOfString:@"TIMESTAMPPLACE" withString:track[@"time"]];
-		archivedLoc = [archivedLoc stringByReplacingOccurrencesOfString:@"TYPEPLACE" withString:[NSString stringWithFormat:@"%d", self.type]
-];
-		archivedLoc = [archivedLoc stringByReplacingOccurrencesOfString:@"VERTACPLACE" withString:[NSString stringWithFormat:@"%.15f", self.vAccuracy]
-];
+		archivedLoc = [archivedLoc stringByReplacingOccurrencesOfString:@"TYPEPLACE" withString:[NSString stringWithFormat:@"%d", self.type]];
+		archivedLoc = [archivedLoc stringByReplacingOccurrencesOfString:@"VERTACPLACE" withString:[NSString stringWithFormat:@"%.15f", self.vAccuracy]];
 		NSData *data = [archivedLoc dataUsingEncoding:NSUTF8StringEncoding];
 		[encodedTracks addObject:data];
 	}
