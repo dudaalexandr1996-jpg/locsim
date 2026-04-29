@@ -161,7 +161,7 @@ int main(int argc, char *argv[], char *envp[]) {
 	double l = -1.0;
 	double sa = -1.0;
 	double ca = -1.0;
-	
+	__unused int p = -1;
 	NSString *plist;
 	NSString *exportPlist;
 	BOOL exportOnly = NO;
