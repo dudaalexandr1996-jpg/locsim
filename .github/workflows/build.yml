@@ -8,21 +8,21 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Install Theos
         run: |
           brew install ldid xz
-          git clone --recursive https://github.com/theos/theos.git $THEOS
-          echo "THEOS=$HOME/theos" >> $GITHUB_ENV
-        env:
-          THEOS: ${{ github.workspace }}/theos
+          git clone --recursive https://github.com/theos/theos.git ${{ github.workspace }}/theos
+          echo "THEOS=${{ github.workspace }}/theos" >> $GITHUB_ENV
 
       - name: Build deb
         run: make package
+        env:
+          THEOS: ${{ github.workspace }}/theos
 
       - name: Upload deb
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: locsim-deb
           path: packages/*.deb
