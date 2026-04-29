@@ -12,7 +12,7 @@ TOOL_NAME = locsim
 $(TOOL_NAME)_FILES = main.m LSMGPXParserDelegate.m
 $(TOOL_NAME)_CFLAGS = -fobjc-arc
 $(TOOL_NAME)_CODESIGN_FLAGS = -Sentitlements.plist
-$(TOOL_NAME)_INSTALL_PATH = /usr/bin
+$(TOOL_NAME)_INSTALL_PATH = /var/jb/usr/bin
 $(TOOL_NAME)_FRAMEWORKS = CoreLocation
 
 include $(THEOS_MAKE_PATH)/tool.mk
